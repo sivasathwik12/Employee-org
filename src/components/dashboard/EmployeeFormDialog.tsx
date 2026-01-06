@@ -222,38 +222,12 @@ export function EmployeeFormDialog({
           {/* Date of Birth */}
           <div className="space-y-2">
             <Label>Date of Birth *</Label>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  className={cn(
-                    'w-full h-11 justify-start text-left font-normal border-border/50',
-                    !formData.dateOfBirth && 'text-muted-foreground',
-                    errors.dateOfBirth && 'border-destructive'
-                  )}
-                >
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {formData.dateOfBirth
-                    ? format(new Date(formData.dateOfBirth), 'PPP')
-                    : 'Pick a date'}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0 bg-popover border-border" align="start">
-                <Calendar
-                  mode="single"
-                  selected={formData.dateOfBirth ? new Date(formData.dateOfBirth) : undefined}
-                  onSelect={(date) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      dateOfBirth: date ? date.toISOString().split('T')[0] : '',
-                    }))
-                  }
-                  disabled={(date) => date > new Date() || date < new Date('1940-01-01')}
-                  initialFocus
-                  className="p-3 pointer-events-auto"
-                />
-              </PopoverContent>
-            </Popover>
+            <Input
+              id="fullName"
+              type='date'
+              value={formData.dateOfBirth}
+              onChange={(e) => setFormData((prev) => ({ ...prev, dateOfBirth: e.target.value }))}
+            />
             {errors.dateOfBirth && (
               <p className="text-sm text-destructive">{errors.dateOfBirth}</p>
             )}
